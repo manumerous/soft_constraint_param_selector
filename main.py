@@ -9,11 +9,11 @@ def function(t, amplitude, frequency):
     return amplitude * np.sin(2 * np.pi * frequency * t)
 
 
-t = np.linspace(-0.1, 0.2, 3001)
+t = np.linspace(-20, 10, 3001)
 
 # Define initial parameters
-init_mu = 100.0
-init_delta = 4.5
+init_mu = 0.1
+init_delta = 5
 
 penalty = RelaxedBarrierPenalty(init_mu, init_delta)
 
@@ -31,8 +31,8 @@ axdelta = plt.axes([0.25, 0.1, 0.65, 0.03])
 delta_slider = Slider(
     ax=axdelta,
     label='Delta',
-    valmin=4,
-    valmax=5,
+    valmin=0.1,
+    valmax=10,
     valinit=init_delta,
 )
 
@@ -53,6 +53,9 @@ mu_slider = Slider(
 def update(val):
     penalty.update_params(mu_slider.val, delta_slider.val)
     line.set_ydata(penalty.cost_function(t))
+    ax.relim()
+    # update ax.viewLim using the new dataLim
+    ax.autoscale_view()
     fig.canvas.draw_idle()
 
 
