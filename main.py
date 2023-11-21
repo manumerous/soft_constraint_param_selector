@@ -12,8 +12,8 @@ def function(t, amplitude, frequency):
 t = np.linspace(-20, 10, 3001)
 
 # Define initial parameters
-init_mu = 0.1
-init_delta = 5
+init_mu = 1.0
+init_delta = 1.0
 
 penalty = RelaxedBarrierPenalty(init_mu, init_delta)
 
@@ -31,8 +31,8 @@ axdelta = plt.axes([0.25, 0.1, 0.65, 0.03])
 delta_slider = Slider(
     ax=axdelta,
     label='Delta',
-    valmin=0.1,
-    valmax=10,
+    valmin=0.005,
+    valmax=5,
     valinit=init_delta,
 )
 
@@ -42,7 +42,7 @@ mu_slider = Slider(
     ax=axmu,
     label="Mu",
     valmin=0,
-    valmax=1000,
+    valmax=10,
     valinit=init_mu,
     orientation="vertical"
 )
